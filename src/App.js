@@ -1,15 +1,14 @@
 
 import './App.css';
-import Navbar from './Components/Navbar';
-import Main from './Components/Main';
-import Card from './Components/Card';
+import ContentPage from './pages/ContentPage';
+import Home from './pages/Home';
+
 
 function App() {
   return (
    <>
-     <Navbar/>
-     <Main/>
-     <Card/>
+     {/* <Home/> */}
+     <ContentPage/>
    </>
   );
 }
