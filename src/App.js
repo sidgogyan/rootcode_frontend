@@ -1,10 +1,15 @@
 
 import './App.css';
+import Navbar from './Components/Navbar';
+import Main from './Components/Main';
+import Card from './Components/Card';
 
 function App() {
   return (
    <>
-     <h1>Hello world</h1>
+     <Navbar/>
+     <Main/>
+     <Card/>
    </>
   );
 }
