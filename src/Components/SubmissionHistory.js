@@ -1,36 +1,30 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
-import Main from '../Components/Main';
+
 import { Table, Tag, Space } from 'antd';
 
 const columns = [
     {
-      title: '',
+      title: 'Time',
       dataIndex: 'name',
       key: 'name',
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: 'Tags',
+      title: 'Status',
       key: 'tags',
       dataIndex: 'tags',
       render: tags => (
         <>
           {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
+            let color = 'geekblue'
+            if (tag === 'ACCEPTED') {
+              {/* color = 'volcano'; */}
+              color='green';
             }
+            else if(tag==='WRONG ANSWER'){
+               color = 'volcano'; 
+            }
+           
             return (
               <Tag color={color} key={tag}>
                 {tag.toUpperCase()}
@@ -45,8 +39,7 @@ const columns = [
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <li className="header__menuItem"><a href="" class="btn btn--sub" style={{paddingTop:'4px',paddingBottom:'4px'}}>Check</a></li>
         </Space>
       ),
     },
@@ -58,40 +51,31 @@ const columns = [
       name: 'John Brown',
       age: 32,
       address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
+      tags: ['ACCEPTED'],
     },
     {
       key: '2',
       name: 'Jim Green',
       age: 42,
       address: 'London No. 1 Lake Park',
-      tags: ['loser'],
+      tags: ['WRONG ANSWER'],
     },
     {
       key: '3',
       name: 'Joe Black',
       age: 32,
       address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
+      tags: ['Time Limit Exceed'],
     },
   ];
 
 
-const ContentPage = () => {
-    return(
-        <>
-            <Navbar/>
-         <Main/>
-         <div style={{width:"70vw",marginLeft:"15vw",marginTop:"90px"}} className='card'>
-         <Table columns={columns} dataSource={data} />
-         </div>
-         <div>
-             Foooter
-         </div>
-         
-        
-        </>
-      );
+const SubmissionHistory = () => {
+  return (
+      <>
+          <Table columns={columns} dataSource={data} />
+      </>
+  );
 };
 
-export default ContentPage;
+export default SubmissionHistory;
