@@ -38,7 +38,6 @@ h6 {
 }
 
 p,
-span,
 strong {
   font-size: 1.6rem;
   color: var(--color-text);
