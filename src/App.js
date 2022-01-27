@@ -10,9 +10,9 @@ import QuestionPage from './pages/QuestionPage';
 function App() {
   return (
    <>
-     {/* <Home/> */}
+     <Home/>
      {/* <ContentPage/> */}
-     <QuestionPage/>
+     {/* <QuestionPage/> */}
 
      {/* <Editor/> */}
    </>
