@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
 import { Tabs } from 'antd';
 import QuestionContent from '../Components/QuestionContent';
 import Solution from '../Components/Solution';
 import SubmissionHistory from '../Components/SubmissionHistory';
+import '../ui.css'
 
 const { TabPane } = Tabs;
 
@@ -14,7 +14,7 @@ const { TabPane } = Tabs;
 const QuestionPage = () => {
   return(
       <>
-          <Navbar/>
+        
 
        
           <div style={{width:"80vw",marginLeft:"2vw",marginTop:"90px",minHeight:'80vh',padding:'10px'}} className='card'>

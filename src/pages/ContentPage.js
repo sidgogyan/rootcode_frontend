@@ -1,22 +1,24 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { Table, Tag, Space } from 'antd';
+import Main from '../Components/Main';
+import axios from 'axios';
+import config from '../services/config';
+const baseURL=config.baseURL
+
+
 
 const columns = [
     {
-      title: '',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Acceptance',
+      dataIndex: 'acceptance',
+      key: 'acceptance',
     },
     {
       title: 'Tags',
@@ -25,8 +27,8 @@ const columns = [
       render: tags => (
         <>
           {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
+            let color = tag.length >= 5 ? 'geekblue' : 'green';
+            if (tag === 'hard') {
               color = 'volcano';
             }
             return (
@@ -38,53 +40,43 @@ const columns = [
         </>
       ),
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      ),
-    },
   ];
   
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
+  
 
 
 const ContentPage = () => {
+
+  const [content, setContent] = useState([]);
+  let {category}=useParams()
+
+  useEffect(async() => {
+     const data=await axios.get(`${baseURL}/content/get/${category}`)
+     console.log(`${baseURL}/content/get/${category}`)
+    console.log(data.data.results)
+    const arr=[]
+    let idx=0
+     data.data.results.map((val)=>{
+        let  obj={
+            key:idx,
+            title:val.title,
+            acceptance:val.acceptance+"%",
+            tags:[val.difficulty]
+          }
+          idx+=1
+          arr.push(obj)
+     })
+     setContent(arr)
+  }, []);
     return(
         <>
 
+        <Main/>
+
          <div style={{width:"70vw",marginLeft:"15vw",marginTop:"90px"}} className='card'>
-         <Table columns={columns} dataSource={data} />
+         <Table columns={columns} dataSource={content} />
          </div>
-         <div>
-             Foooter
-         </div>
+        
          
         
         </>
