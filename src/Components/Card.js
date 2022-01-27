@@ -2,7 +2,9 @@ import axios from 'axios';
 import React from 'react';
 import { useState,useEffect } from 'react';
 import config from '../services/config';
+import { Link } from 'react-router-dom';
 const baseURL=config.baseURL
+
 
 const Card = () => {
 
@@ -25,9 +27,9 @@ const Card = () => {
           
             {/* start div */}
             return(
-              <div class="column card">
+              <div   class="column card">
           <div class="dev">
-            <a href="{% url 'user-profile' profile.id%}" class="card__body">
+            <Link to={`/${cat.title}`}  class="card__body">
               <div class="dev__profile">
                 <img class="avatar avatar--md" src={cat.imagelink} alt="image" />
                 <div class="dev__meta">
@@ -47,7 +49,7 @@ const Card = () => {
               
               
               </div>
-            </a>
+            </Link>
           </div>
         </div>
             )

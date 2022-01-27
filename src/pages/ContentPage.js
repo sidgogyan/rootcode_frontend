@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
-import Main from '../Components/Main';
 import { Table, Tag, Space } from 'antd';
 
 const columns = [
@@ -80,8 +78,7 @@ const columns = [
 const ContentPage = () => {
     return(
         <>
-            <Navbar/>
-         <Main/>
+
          <div style={{width:"70vw",marginLeft:"15vw",marginTop:"90px"}} className='card'>
          <Table columns={columns} dataSource={data} />
          </div>
