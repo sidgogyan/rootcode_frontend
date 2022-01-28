@@ -14,6 +14,7 @@ const Card = () => {
 
       const res= await axios.get(`${baseURL}/category/getall`);
       // console.log(res.data.results);
+      
       setCategory(res.data.results)
   }, []);
   

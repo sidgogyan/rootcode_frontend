@@ -7,12 +7,12 @@ import ReactMarkdown from 'react-markdown'
 
 
 
-const QuestionContent = ({content}) => {
+const QuestionContent = ({content,id}) => {
 
   return (
       <>
        <ReactMarkdown>{content}</ReactMarkdown>
-         <Editor/>
+         <Editor id={id}/>
 
         
        

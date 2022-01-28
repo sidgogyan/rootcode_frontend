@@ -18,9 +18,9 @@ const { SubMenu } = Menu;
 
 
 
-const Editor = () => {
+const Editor = ({id}) => {
   const [input, setInput] = React.useState("");
-  const [res, setResult] = React.useState(false);
+  const [res, setResult] = React.useState("");
   const [code,setCode]=React.useState("")
   const [output,setOutput]=React.useState("")
   const [loading,setLoading]=React.useState(false)
@@ -34,6 +34,20 @@ const Editor = () => {
     myres.data.output.stderr!=""? setOutput(myres.data.output.stderr):(myres.data.output.stdout!=""?setOutput(myres.data.output.stdout):setOutput(myres.data.output.errorType))
     setInput("")
     console.log(output)
+    setLoading(false)
+    
+  }
+
+  const submit=async()=>{
+    setLoading(true)
+    const myres= await axios.post(`${baseURL}/question/submit/${id}`,{'code':code,'langauge':'java'})
+    
+    if(myres.data.verdict==undefined){
+      myres.data.verdict="Plz Add Main Class"
+    }
+    console.log(myres.data.verdict)
+    setInput("")
+    setResult(myres.data.verdict)
     setLoading(false)
     
   }
@@ -89,7 +103,7 @@ const Editor = () => {
         <Input.TextArea rows={8}  style={{width:"40%"}}  className='card'  onChange={(e)=>setInput(e.target.value)} />
         </div></span>:""}
 
-        {res && <MyResult/>}
+        {res && <MyResult status={res}/>}
 
         {output!=""?<span>  <h6 style={{marginTop:'20px',marginLeft:"20px"}}>Output</h6>
         <div style={{display:"flex"}} >
@@ -102,8 +116,7 @@ const Editor = () => {
       
         <div  class="btn btn--sub"  style={{marginLeft:"40px",marginTop:'10px'}} onClick={()=>run_code()}>Run</div>
         <div  class="btn btn--sub"  onClick={() => {
-            setInput("");
-            setResult(true);
+          submit()
           }} style={{marginLeft:"40px",marginTop:'10px'}}>Submit</div>
         <span  style={{marginLeft:"52%"}}>Custom input</span>
         <Switch
@@ -113,7 +126,7 @@ const Editor = () => {
           unCheckedChildren=""
           onChange={() => {
             setInput(!input);
-            setResult(false);
+            setResult("");
           }}
           />
 

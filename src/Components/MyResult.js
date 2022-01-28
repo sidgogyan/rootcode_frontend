@@ -1,17 +1,19 @@
 import React from 'react';
 import { Result, Button } from 'antd';
 
-const MyResult = () => {
+const MyResult = ({status}) => {
+  const data=status=="Accepted"?"success":(status=='Wrong answer'?"error":"warning")
+  
   return (
       <>
           <Result
-    status="success"
-    title="130/130 test case passed"
-    extra={[
-      <div class ="btn" >
-        check status
-      </div>
-    ]}
+    status={data}
+    title={status}
+    // extra={[
+    //   <div class ="btn" >
+    //     check status
+    //   </div>
+    // ]}
   />
       </>
   );

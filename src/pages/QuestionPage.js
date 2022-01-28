@@ -33,7 +33,7 @@ const QuestionPage = () => {
           <div style={{width:"80vw",marginLeft:"2vw",marginTop:"90px",minHeight:'80vh',padding:'10px'}} className='card'>
           <Tabs  type="card">
     <TabPane tab="Question" key="1">
-      <QuestionContent content={content}/>
+      <QuestionContent content={content} id={id}/>
     </TabPane>
     <TabPane tab="Solution" key="2">
      <Solution/>

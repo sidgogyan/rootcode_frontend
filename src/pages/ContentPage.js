@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 
 import { useParams ,Link,useNavigate} from 'react-router-dom';
 
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Spin } from 'antd';
 import Main from '../Components/Main';
 import axios from 'axios';
 import config from '../services/config';
@@ -52,6 +52,7 @@ const columns = [
 const ContentPage = () => {
 
   const [content, setContent] = useState([]);
+  const [loading,setLoading]=useState(true)
   let {category}=useParams()
   let navigate = useNavigate();
 
@@ -72,12 +73,13 @@ const ContentPage = () => {
           arr.push(obj)
      })
      setContent(arr)
+     setLoading(false)
   }, []);
     return(
         <>
 
         <Main/>
-
+        <Spin spinning={loading}>
          <div style={{width:"70vw",marginLeft:"15vw",marginTop:"90px"}} className='card'>
          <Table columns={columns} dataSource={content}  onRow={(record, rowIndex) => {
            
@@ -85,8 +87,10 @@ const ContentPage = () => {
       
       onClick: event => { navigate(`/${category}/${record.key}/${record.title}`)}, 
     };
+    
   }} />
          </div>
+         </Spin>
         
          
         
