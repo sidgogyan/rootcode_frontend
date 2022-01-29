@@ -1,4 +1,4 @@
 const config={
-   "baseURL":"http://localhost:8000"
+   "baseURL":"https://rootcodebackend.herokuapp.com"
 }
 export default config
