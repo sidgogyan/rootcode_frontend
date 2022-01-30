@@ -28,10 +28,10 @@ const Editor = ({id}) => {
   const run_code=async()=>{
 
     setLoading(true)
-    const myres= await axios.post(`${baseURL}/question/run_code`,{'code':code,'input':input,'langauge':'java'})
+    const myres= await axios.post(`${baseURL}/runcode`,{'code':code,'input':input,'langauge':'java'})
     
     // console.log(myres.data.output)
-    myres.data.output.stderr!=""? setOutput(myres.data.output.stderr):(myres.data.output.stdout!=""?setOutput(myres.data.output.stdout):setOutput(myres.data.output.errorType))
+    myres.data.output.stderr!=null? setOutput(myres.data.output.stderr):(myres.data.output.stdout!=null?setOutput(myres.data.output.stdout):setOutput(myres.data.output.servererror))
     setInput("")
     console.log(output)
     setLoading(false)
@@ -40,14 +40,12 @@ const Editor = ({id}) => {
 
   const submit=async()=>{
     setLoading(true)
-    const myres= await axios.post(`${baseURL}/question/submit/${id}`,{'code':code,'langauge':'java'})
+    const myres= await axios.post(`${baseURL}/submit/${id}`,{'code':code,'langauge':'java'})
     
-    if(myres.data.verdict==undefined){
-      myres.data.verdict="Plz Add Main Class"
-    }
-    console.log(myres.data.verdict)
+
+    console.log(myres.data.output.verdict)
     setInput("")
-    setResult(myres.data.verdict)
+    setResult(myres.data.output.verdict)
     setLoading(false)
     
   }
